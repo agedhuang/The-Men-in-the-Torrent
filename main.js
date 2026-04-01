@@ -6,14 +6,14 @@ getContentHTML = (content) => {
   let contentHtml = '';
   if (content.type === 'img') {
     contentHtml =
-      `<div class="image-wrapper" data-gen="${content.gen_id}"> 
+      `<div class="image-wrapper" data-gen="${content.gen_id}" data-searchable="${content.annotation_en ? content.annotation_en.toLowerCase() : ''}"> 
         <img src="${content.file_path}" alt="${content.annotation_cn || 'Family Huang img'}"> 
       </div>`
   }
 
   else if (content.type === 'text') {
     contentHtml =
-      `<div class="text-block" data-gen="${content.gen_id}"> 
+      `<div class="text-block" data-gen="${content.gen_id}" data-searchable="${content.content_en ? content.content_en.toLowerCase() : ''}"> 
         <p>${content.content_en || 'Family Huang text'}</p> 
       </div>`
   }
@@ -55,6 +55,21 @@ const applyFilter = () => {
   });
 };
 
+//setting thr search function------------------
+const applySearch = () => {
+  const keyword = document.querySelector('#search-input').value.toLowerCase();
+  const wrappers = document.querySelectorAll('[data-searchable]');
+  
+  wrappers.forEach((wrapper) => {
+    const searchable = wrapper.dataset.searchable;
+    
+    if (keyword === '' || searchable.includes(keyword)) {
+      wrapper.classList.remove('hidden');
+    } else {
+      wrapper.classList.add('hidden');
+    }
+  });
+};
 
 
 // ——————————————————get data from API ——————————————————————
@@ -72,4 +87,6 @@ fetchJson(`https://opensheet.elk.sh/${googleSheetID}/${tabName2}`, (json) => {
 
   applyFilter(); //firstly apply filter to show all
   document.querySelector('#filters').addEventListener('change', applyFilter); // Bind the filter function to the change event of the checkboxes.
+
+  document.querySelector('#search-input').addEventListener('input', applySearch);
 })
