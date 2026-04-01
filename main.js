@@ -11,6 +11,13 @@ getContentHTML = (content) => {
       </div>`
   }
 
+  else if (content.type === 'text') {
+    contentHtml =
+      `<div class="text-block" data-gen="${content.gen_id}"> 
+        <p>${content.content_en || 'Family Huang text'}</p> 
+      </div>`
+  }
+
   return contentHtml;
 }
 
@@ -35,7 +42,7 @@ const applyFilter = () => {
   const checkboxes = document.querySelectorAll('.gen-filter:checked');
   let selectedGens = Array.from(checkboxes).map((cb) => cb.value);
   
-  const imageWrappers = document.querySelectorAll('.image-wrapper');
+  const imageWrappers = document.querySelectorAll('#content div');
   
   imageWrappers.forEach((wrapper) => {
     let wrapperGen = wrapper.dataset.gen;
@@ -61,7 +68,7 @@ let fetchJson = (url, callback) => {
 fetchJson(`https://opensheet.elk.sh/${googleSheetID}/${tabName2}`, (json) => {
 	console.log("Content data:", json) // See what we get back.
   currentBlocksData = json; // Store the blocks data in the global variable for later use (e.g., shuffle button).
-	layoutBlocks(json) // since I need to group the blocks by each page, 5 blocks for each page, I can't do the foreach() loop here.
+  layoutBlocks(json);
 
   applyFilter(); //firstly apply filter to show all
   document.querySelector('#filters').addEventListener('change', applyFilter); // Bind the filter function to the change event of the checkboxes.

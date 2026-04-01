@@ -5,9 +5,6 @@
   }
 }
 
-.image-wrapper {
-  display: block;
-}
-.image-wrapper.hidden {
+.hidden {
   display: none;
 }
