@@ -4,13 +4,24 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>the-men-in-the-torrent</title>
-    <link rel="stylesheet" href="./src/reset.css">
-    <link rel="stylesheet" href="./src/style.css">
-    <script src="./src/main.js" defer></script>
+    <!-- <link rel="stylesheet" href="./reset.css"> -->
+    <link rel="stylesheet" href="./style.css">
+    <script src="./main.js" defer></script>
   </head>
   <body>
     <main>
       <h1>The Men in the Torrent</h1>
+       <div id="filters">
+        <label>
+          <input type="checkbox" value="all" class="gen-filter" checked> All
+        </label>
+        <label>
+          <input type="checkbox" value="1" class="gen-filter"> Gen 1
+        </label>
+        <label>
+          <input type="checkbox" value="2" class="gen-filter"> Gen 2
+        </label>
+      </div>
       <div id="content"></div>
     </main>
   </body>

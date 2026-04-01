@@ -1,0 +1,13 @@
+#content{
+  img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+.image-wrapper {
+  display: block;
+}
+.image-wrapper.hidden {
+  display: none;
+}
