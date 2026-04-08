@@ -2,18 +2,20 @@ let googleSheetID = '1LfoPTOKOzmgG51fXZ76drBEt9h6wwAW7aPHRL-7rFYc'
 let tabName1 = 'generation' 
 let tabName2= 'content_blocks' 
 
+
+// Set single HTML for each img or text
 getContentHTML = (content) => {
   let contentHtml = '';
   if (content.type === 'img') {
     contentHtml =
-      `<div class="image-wrapper" data-gen="${content.gen_id}" data-searchable="${content.annotation_en ? content.annotation_en.toLowerCase() : ''}"> 
+      `<div class="image-wrapper" data-id="${content.id}" data-gen="${content.gen}" data-searchable="${content.annotation_en ? content.annotation_en.toLowerCase() : ''}"> 
         <img src="${content.file_path}" alt="${content.annotation_cn || 'Family Huang img'}"> 
       </div>`
   }
 
   else if (content.type === 'text') {
     contentHtml =
-      `<div class="text-block" data-gen="${content.gen_id}" data-searchable="${content.content_en ? content.content_en.toLowerCase() : ''}"> 
+      `<div class="text-block" data-id="${content.id}" data-gen="${content.gen}" data-searchable="${content.content_en ? content.content_en.toLowerCase() : ''}"> 
         <p>${content.content_en || 'Family Huang text'}</p> 
       </div>`
   }
@@ -21,6 +23,7 @@ getContentHTML = (content) => {
   return contentHtml;
 }
 
+// Put HTML togther and layout the blocks in the page
 let layoutBlocks = (contentData) => {
 
   let content = document.querySelector('#content');
@@ -44,19 +47,56 @@ const setupModal = () => {
   const modalImg = document.querySelector('#modal-img');
   const modalCaption = document.querySelector('#modal-caption');
   const closeBtn = document.querySelector('#close-modal');
-
+  const favBtn = document.querySelector('.fav-btn'); 
+  
+  
   document.querySelectorAll('.image-wrapper').forEach(wrapper => {
     wrapper.addEventListener('click', () => {
+      const currentID = wrapper.dataset.id;
       modalImg.src = wrapper.querySelector('img').src;
       modalCaption.innerText = wrapper.dataset.searchable || "";
+
+      // check if the current image is in favorites
+      favBtn.dataset.id = currentID;
+      //parse funvtion turn the string back to array 
+      let favorites = JSON.parse(localStorage.getItem('my_favorites')) || [];
+      // function some will run through the array to see if any item matches the condition
+      const isFav = favorites.some(item => item.id === currentID);
+      favBtn.innerText = isFav ? '❤️' : '🩶';
+      
       dialog.showModal();
     });
   });
-
+  
   closeBtn.addEventListener('click', () => {
     dialog.close();
   });
+
+
+
+  // favorite button event listener
+  favBtn.addEventListener('click', () => { 
+    const id = favBtn.dataset.id;
+    const src = modalImg.src;
+    let favorites = JSON.parse(localStorage.getItem('my_favorites')) || [];
+    //findindex: find something in the array and return the index, if not found, return -1
+    const index = favorites.findIndex(item => item.id === id);
+    if (index > -1) { 
+      favorites.splice(index, 1); //splice is to delet, I can control how many item I want to delete, so convenient!
+      favBtn.innerText = '🩶';
+    } else {
+      favorites.push({ id: id, src: src }); // Push the item with both id and src
+      favBtn.innerText = '❤️';
+    }
+
+    localStorage.setItem('my_favorites', JSON.stringify(favorites)); //store the updated favorites back to local storage
+  })
+
 }
+
+
+
+
 
 
 // setting the filter function ------------------

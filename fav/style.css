@@ -1,0 +1,22 @@
+#fav-content {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+@media screen and (width <= 1000px) {
+  #fav-content {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (width <= 600px) {
+  #fav-content {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
