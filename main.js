@@ -28,14 +28,36 @@ let layoutBlocks = (contentData) => {
   
   if (!contentData.length) return; // If there are no blocks, exit the function.
 
-  let htmlArray = contentData.map(function(content) {
+  let htmlArray = contentData.map(function (content) {
     return getContentHTML(content);
   });
   let allBlocksHTML = htmlArray.join(''); // Generate HTML for all blocks and join them into a single string.
   content.innerHTML = allBlocksHTML;
   // Re-bind interactions because elements are new!
 
-}  
+  setupModal(); // use Modal for image
+}
+
+// Setting the modal function for image display------------------
+const setupModal = () => {
+  const dialog = document.querySelector('#modal');
+  const modalImg = document.querySelector('#modal-img');
+  const modalCaption = document.querySelector('#modal-caption');
+  const closeBtn = document.querySelector('#close-modal');
+
+  document.querySelectorAll('.image-wrapper').forEach(wrapper => {
+    wrapper.addEventListener('click', () => {
+      modalImg.src = wrapper.querySelector('img').src;
+      modalCaption.innerText = wrapper.dataset.searchable || "";
+      dialog.showModal();
+    });
+  });
+
+  closeBtn.addEventListener('click', () => {
+    dialog.close();
+  });
+}
+
 
 // setting the filter function ------------------
 const applyFilter = () => {
