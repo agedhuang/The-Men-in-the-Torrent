@@ -46,10 +46,9 @@ const setupModal = () => {
   const dialog = document.querySelector('#modal');
   const modalImg = document.querySelector('#modal-img');
   const modalCaption = document.querySelector('#modal-caption');
-  const closeBtn = document.querySelector('#close-modal');
   const favBtn = document.querySelector('.fav-btn'); 
   
-  
+
   document.querySelectorAll('.image-wrapper').forEach(wrapper => {
     wrapper.addEventListener('click', () => {
       const currentID = wrapper.dataset.id;
@@ -67,34 +66,44 @@ const setupModal = () => {
       dialog.showModal();
     });
   });
-  
-  closeBtn.addEventListener('click', () => {
-    dialog.close();
-  });
-
-
-
-  // favorite button event listener
-  favBtn.addEventListener('click', () => { 
-    const id = favBtn.dataset.id;
-    const src = modalImg.src;
-    let favorites = JSON.parse(localStorage.getItem('my_favorites')) || [];
-    //findindex: find something in the array and return the index, if not found, return -1
-    const index = favorites.findIndex(item => item.id === id);
-    if (index > -1) { 
-      favorites.splice(index, 1); //splice is to delet, I can control how many item I want to delete, so convenient!
-      favBtn.innerText = '🩶';
-    } else {
-      favorites.push({ id: id, src: src }); // Push the item with both id and src
-      favBtn.innerText = '❤️';
-    }
-
-    localStorage.setItem('my_favorites', JSON.stringify(favorites)); //store the updated favorites back to local storage
-  })
-
 }
 
 
+
+//favbtn listener and modal close button listener
+const initModal = () => {
+  const dialog = document.querySelector('#modal');
+  const closeBtn = document.querySelector('#close-modal');
+  const favBtn = document.querySelector('.fav-btn');
+  const modalImg = document.querySelector('#modal-img');
+
+  //close modal when press close burron
+  closeBtn.addEventListener('click', () => {
+    dialog.close();
+  });
+  //close modal when click outside of the modal content
+  document.addEventListener('click', (event) => {
+    if (event.target === dialog) {
+      dialog.close();
+    }
+  });
+
+  favBtn.addEventListener('click', () => {
+    const id = favBtn.dataset.id;
+    const src = modalImg.src;
+    let favorites = JSON.parse(localStorage.getItem('my_favorites')) || [];
+    const index = favorites.findIndex(item => item.id === id);
+
+    if (index > -1) {
+      favorites.splice(index, 1);
+      favBtn.innerText = '🩶';
+    } else {
+      favorites.push({ id: id, src: src });
+      favBtn.innerText = '❤️';
+    }
+    localStorage.setItem('my_favorites', JSON.stringify(favorites));
+  });
+};
 
 
 
@@ -116,6 +125,9 @@ const applyFilter = () => {
     }
   });
 };
+
+
+
 
 //setting thr search function------------------
 const applySearch = () => {
@@ -145,6 +157,8 @@ let fetchJson = (url, callback) => {
 fetchJson(`https://opensheet.elk.sh/${googleSheetID}/${tabName2}`, (json) => {
 	console.log("Content data:", json) // See what we get back.
   currentBlocksData = json; // Store the blocks data in the global variable for later use (e.g., shuffle button).
+  
+  initModal(); // Initialize modal interactions listener 
   layoutBlocks(json);
 
   applyFilter(); //firstly apply filter to show all
