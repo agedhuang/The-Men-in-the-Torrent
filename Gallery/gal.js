@@ -2,6 +2,18 @@ let googleSheetID = '1LfoPTOKOzmgG51fXZ76drBEt9h6wwAW7aPHRL-7rFYc'
 let tabName1 = 'generation' 
 let tabName2= 'content_blocks' 
 
+let searchlogo = document.querySelector('.search-logo');
+let searchContainer = document.querySelector('.search-container');
+let searchButton = document.querySelector('.search-container svg');
+
+searchlogo.addEventListener('click', function () {
+  document.querySelector('#search-input').value = ''; // Clear the search input when opening the search container
+  searchContainer.classList.add('search-container-active');
+});
+
+searchButton.addEventListener('click', function() {
+  searchContainer.classList.remove('search-container-active');
+});
 
 // Set single HTML for each img or text
 getContentHTML = (content) => {
