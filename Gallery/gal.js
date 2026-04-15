@@ -80,6 +80,16 @@ const setupModal = () => {
   });
 }
 
+const updateFavPreview = () => {
+  const favWindowImg = document.querySelector('.fav-window img');
+  if (!favWindowImg) return; // 防止找不到元素报错
+
+  let favorites = JSON.parse(localStorage.getItem('my_favorites')) || [];
+  if (favorites.length > 0) {
+    favWindowImg.src = favorites[favorites.length - 1].src;
+    console.log("Updated fav preview with:", favorites[favorites.length - 1].src);
+  }
+}
 
 
 //favbtn listener and modal close button listener
@@ -113,7 +123,9 @@ const initModal = () => {
       favorites.push({ id: id, src: src });
       favBtn.innerText = '❤️';
     }
+    // Set localStorage after updating favorites
     localStorage.setItem('my_favorites', JSON.stringify(favorites));
+    updateFavPreview(); // Update the latest favorite preview in the corner
   });
 };
 
@@ -174,6 +186,7 @@ fetchJson(`https://opensheet.elk.sh/${googleSheetID}/${tabName2}`, (json) => {
   layoutBlocks(json);
 
   applyFilter(); //firstly apply filter to show all
+  updateFavPreview(); //show fav preview at the beginning
   document.querySelector('#filters').addEventListener('change', applyFilter); // Bind the filter function to the change event of the checkboxes.
 
   document.querySelector('#search-input').addEventListener('input', applySearch);
