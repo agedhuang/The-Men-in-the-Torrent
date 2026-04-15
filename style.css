@@ -1,3 +1,10 @@
+@font-face {
+  font-family: Palatino;
+  src: url(./assets/font/Palatino.ttc) format("truetype");
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+
 body{
     margin: 0;
     padding: 0;
@@ -29,15 +36,109 @@ body{
 
 .Svg {
   position: fixed;
-  z-index: 9999;
+  z-index: 2;
 }
 
 .container {
   position: fixed;
   width: 100svw;
   height: 100svh;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 2;
+  box-sizing: border-box;
+  padding-inline: 5rem;
+}
+
+.info-button {
+  background-color: #AF9033;
+  border: 1px solid #FFE69D;
+  color: #FFE69D;
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 9999;
+  font-size: 1.2rem;
+  border-radius: 10px;
+  width: 7rem;
+  height: 2rem;
+  cursor: pointer;
+}
+
+.gallery-button {
+  background-color: #AF9033;
+  border: 1px solid #FFE69D;
+  color: #FFE69D;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  border-radius: 10px;
+  width: 7rem;
+  height: 2rem;
+  cursor: pointer;
+}
+
+.info-content{
+  position: absolute;
+  top: 200%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: hsla(38, 80%, 14%, 1);
+  width: 30rem;
+  height: 80svh;
+  box-sizing: border-box;
+  padding: 2rem;
+  border-radius: 0.8rem;
+  z-index: 3;
+  color: #FFCE9D;
+  overflow-y: scroll;
+  transition: all 0.5s ease;
+  /* display: none; */
+}
+
+.info-content-active{
+  top: 50%;
+}
+
+h1{
+  font-size: 1.6rem;
+  font-family: Palatino;
+}
+
+h2 {
+  font-size: 1.2rem;
+  font-family: Palatino;
+  margin-block: 2.4rem 0.5rem;  
+}
+
+.info-content > p{
+  font-size: 1rem;
+  font-family: 'Spectral', serif;
+  font-weight: 400;
+  line-height: 125%;
+  margin-inline-start: 1.8rem;
+}
+
+p.special-para{
+  margin-inline-start: 0rem;
+  color: #77582C;
+}
+
+ul{
+  h3{
+    font-size: 1.1rem;
+    font-family: Palatino;
+    margin-block: 1.5rem 0.2rem;
+    margin-inline-start: 1.8rem;
+  }
+  p{
+    font-size: 1rem;
+    font-family: 'Spectral', serif;
+    font-weight: 400;
+    line-height: 125%;
+    margin-block: 0.5rem 0.7rem;
+    padding-inline-start: 1.8rem;
+  }
 }
