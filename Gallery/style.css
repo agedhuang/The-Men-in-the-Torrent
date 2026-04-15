@@ -1,7 +1,50 @@
+@font-face {
+  font-family: Palatino;
+  src: url(./assets/font/Palatino.ttc) format("truetype");
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+
+body{
+  background-color: #362208;
+}
+
+.sidebar-container{
+  position: fixed;
+  /* top: 0; */
+  bottom: 0;
+  width: 100%;
+  height: 8.5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  /* border: red solid 1px; */
+  background-image: linear-gradient(to bottom, #36220800 0%, #362208 15%);
+  padding-inline: 3rem ;
+}
+
+.logo {
+  width: 3rem;
+  height: auto;
+  cursor: pointer;
+  z-index: 4;
+  justify-content: center;
+  align-self: center;
+  display: flex;
+}
+
+.logo svg{
+  align-self: center;
+  width: 4rem;
+  height: auto;
+}
+
 #content{
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   gap: 20px;
+  padding-inline: 2rem;
 
   img {
     width: 100%;
@@ -12,6 +55,87 @@
 .hidden {
   display: none;
 }
+
+#filters {
+  background-color: rgb(0, 0, 0);
+  width: 40svw;
+  height: 6rem;
+  border-radius: 2rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding-inline: 2.5rem;
+  padding-block: 1rem ;
+  border: #af8355 solid 1px;
+  color: #af8355;
+  font-family: 'Spectral', serif;
+}
+
+label {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.8rem;
+  cursor: pointer;
+  flex-shrink: 0;
+  img{
+    height: 2rem;
+    width: auto;
+  }
+}
+
+input.gen-filter {
+  display: none; 
+}
+
+input[type="checkbox"]:not(:checked) ~ * {
+  color: grey;
+  opacity: 0.5;
+}
+
+.gen5-item {
+  width: 3rem;
+  height: 2rem;
+  background-color: #00000000;
+  border: 1px dashed #af8355;
+  border-radius: 50%;
+}
+
+.search-container {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 5;
+  border: red solid 1px;
+  background-color: #1a11049c;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: none;
+}
+
+#search-input {
+  width: 50%;
+  height: 4rem;
+  padding: 1rem 2rem;         
+  background-color: #1a1104;  
+  border: 1px solid #af8355;  
+  border-radius: 10rem;        
+  color: #af8355;            
+  font-family: 'Spectral', serif;
+  font-size: 1.5rem;
+  outline: none;             
+}
+
+.search-container-active {
+  display: block;
+}
+
 
 #modal {
   padding: 20px;
