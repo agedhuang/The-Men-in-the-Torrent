@@ -302,5 +302,26 @@ input[type="checkbox"]:not(:checked) ~ * {
     height: 1.2rem;
     width: 1.8rem;
   }
+
+  .search-wrapper {
+    width: 90%;
+    height: 3.5rem;
+    padding: 1rem 2rem;         
+    background-color: #1a1104;  
+    border: 1px solid #af8355;  
+    border-radius: 10rem;        
+    color: #af8355;            
+    font-family: 'Spectral', serif;
+    font-size: 1.2rem;
+    outline: none; 
+    display: flex;
+    align-items: center;
+    justify-content: space-between; 
+    svg {
+      cursor: pointer;
+      width: 1.2rem;
+    }           
+  }
+
 }
 
