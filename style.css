@@ -145,14 +145,30 @@ ul{
   }
 }
 
-@media screen and (width <= 500px) {
+@media screen and (width <= 600px) {
   .container {
     flex-direction: column;
-    padding-block: 10rem;
+    padding-block: 4rem;
   }
 
   .info-content{
     width: 85dvw;
     height: 90dvh;
+  }
+
+  .logo svg{
+    width: 5rem;
+  }
+
+  .info-button {
+    width: 5rem;
+    height: 1.6rem;
+    font-size: 1rem;
+  }
+
+  .gallery-button {
+    width: 5rem;
+    height: 1.6rem;
+    font-size: 1rem;
   }
 }
