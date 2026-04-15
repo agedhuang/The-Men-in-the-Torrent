@@ -80,6 +80,7 @@ const setupModal = () => {
   });
 }
 
+// favorite preview in the corner
 const updateFavPreview = () => {
   const favWindowImg = document.querySelector('.fav-window img');
   if (!favWindowImg) return; // 防止找不到元素报错
@@ -88,7 +89,8 @@ const updateFavPreview = () => {
   if (favorites.length > 0) {
     favWindowImg.src = favorites[favorites.length - 1].src;
     console.log("Updated fav preview with:", favorites[favorites.length - 1].src);
-  }
+  }else {
+    favWindowImg.src = '../assets/gen1/img/1.1.avif';}
 }
 
 
