@@ -20,18 +20,21 @@ body{
   justify-content: space-between;
   align-items: center;
   /* border: red solid 1px; */
-  background-image: linear-gradient(to bottom, #36220800 0%, #362208 15%);
+  background-image: linear-gradient(to bottom, #36220800 0%, #362208 0%);
   padding-inline: 3rem ;
 }
 
 .logo {
-  width: 3rem;
-  height: auto;
+  width: 100%;
+  padding-block: 1rem;
   cursor: pointer;
-  z-index: 4;
+  z-index: 11;
   justify-content: center;
   align-self: center;
   display: flex;
+  position: fixed;
+  top: 0;
+  background-image: linear-gradient(to top, #36220800 0%, #362208 0%);
 }
 
 .logo svg{
@@ -46,7 +49,7 @@ body{
   gap: 20px;
   padding-inline: 2rem;
   padding-block: 2rem;
-  margin-block-end: 10rem;
+  margin-block: 5rem 10rem;
   img {
     width: 100%;
     height: auto;
@@ -60,7 +63,7 @@ body{
 #filters {
   background-color: rgb(0, 0, 0);
   width: 40svw;
-  height: 6rem;
+  height: 7rem;
   border-radius: 2rem;
   display: flex;
   flex-direction: row;
@@ -88,22 +91,50 @@ label {
   }
 }
 
+.dot{
+  display: block;
+  width: 0.5rem;
+  height: 0.2rem;
+  background-color: #ef9d47;
+  border-radius: 3rem;
+  opacity: 1;
+}
+
+
 input.gen-filter {
   display: none; 
 }
 
-input[type="checkbox"]:not(:checked) ~ * {
+input[type="checkbox"]:not(:checked) ~ img {
   color: grey;
   opacity: 0.5;
 }
 
-.search-logo {
+input[type="checkbox"]:not(:checked) ~ p {
+  color: grey;
+  opacity: 0.5;
+}
+
+input[type="checkbox"]:not(:checked) ~ .dot {
+  opacity: 0;
+}
+
+.search-logo{
+  /* border: red solid 1px; */
+  width: 7rem;
+  height: 4rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.search-logo svg {
   cursor: pointer;
 }
 
 .gen5-item {
   width: 3rem;
   height: 2rem;
+  flex-shrink: 0;
   background-color: #00000000;
   border: 1px dashed #af8355;
   border-radius: 50%;
@@ -117,9 +148,9 @@ input[type="checkbox"]:not(:checked) ~ * {
   align-items: center;
   z-index: 5;
   /* border: red solid 1px; */
-  background-color: #1a11049c;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  background-color: #1a110400;
+  /* backdrop-filter: blur(10px); */
+  /* -webkit-backdrop-filter: blur(10px); */
   display: none;
 }
 
@@ -128,7 +159,8 @@ input[type="checkbox"]:not(:checked) ~ * {
   height: 4rem;
   padding: 1rem 2rem;         
   background-color: #1a1104;  
-  border: 1px solid #af8355;  
+  border: 1.5px solid #af8355;  
+  box-shadow: 0 0 1rem #2b16009b;
   border-radius: 10rem;        
   color: #af8355;            
   font-family: 'Spectral', serif;
@@ -146,29 +178,61 @@ input[type="checkbox"]:not(:checked) ~ * {
   display: flex;
 }
 
+.fav-wrapper {
+  /* border: red solid 1px; */
+  height: 6rem;
+  top: 0;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
 .fav-window {
-  position: fixed;
-  top: 2rem;
-  right: 2rem;
-  width: 8rem;
-  height: 8rem;
-  border-radius: 1rem;
+  width: 7rem;
+  height: 80%;
+  border-radius: 0.5rem;
   background-color: #362208;
-  border: yellow solid 0.3rem;
+  border: #FFE69D solid 0.2rem;
   overflow: hidden;
+  transform-origin: bottom right;
   transition: all 0.3s ease;
+  display: relative;
+  p{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #FFE69D;
+    background-color: #af9033a5;
+    border: 0.005px solid #FFE69D;
+    font-family: 'Spectral', serif;
+    padding: 0.06rem 0.12rem;
+    box-sizing: border-box;
+    border-radius: 0.5rem;
+    font-size: 0.15rem;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
 }
 
 .fav-window img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 1rem;
+  /* border-radius: 1rem; */
 }
 
 .fav-window:hover {
-  width: 20rem;
-  height: 20rem;
+  transform: scale(9);
+}
+
+.fav-window:hover p {
+  opacity: 1;
+}
+
+.image-wrapper * {
+  cursor: pointer;
 }
 
 
@@ -274,12 +338,13 @@ input[type="checkbox"]:not(:checked) ~ * {
   .fav-window {
     position: fixed;
     top: 1rem;
-    right: 1rem;
+    right: 50%;
+    transform: translateX(50%);
     width: 5rem;
     height: 5rem;
     border-radius: 0.5rem;
     background-color: #362208;
-    border: yellow solid 0.2rem;
+    border: #af8355 solid 0.2rem;
   }
 
   #filters {

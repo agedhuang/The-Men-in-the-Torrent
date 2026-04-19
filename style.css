@@ -41,6 +41,7 @@ body{
   height: 100%;
   overflow: hidden;
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
   align-items: center;
   z-index: 2;
@@ -157,7 +158,7 @@ ul{
   }
 
   .logo svg{
-    width: 5rem;
+    width: 12rem;
   }
 
   .info-button {

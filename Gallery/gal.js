@@ -5,15 +5,26 @@ let tabName2= 'content_blocks'
 let searchlogo = document.querySelector('.search-logo');
 let searchContainer = document.querySelector('.search-container');
 let searchButton = document.querySelector('.search-container svg');
+let searchWrapper = document.querySelector('.search-wrapper');
 
 searchlogo.addEventListener('click', function () {
   document.querySelector('#search-input').value = ''; // Clear the search input when opening the search container
   searchContainer.classList.add('search-container-active');
 });
 
-searchButton.addEventListener('click', function() {
-  searchContainer.classList.remove('search-container-active');
-});
+// Close search container when clicking outside of it or on the search button
+document.addEventListener('click', function (event) {
+
+  if (searchContainer.classList.contains('search-container-active')) {
+
+    const isClickInside = searchWrapper.contains(event.target);
+    const isClickOnLogo = searchlogo.contains(event.target);
+
+    if ((!isClickInside && !isClickOnLogo) || searchButton.contains(event.target)) {
+      searchContainer.classList.remove('search-container-active');
+    }
+  }
+})
 
 // Set single HTML for each img or text
 getContentHTML = (content) => {
@@ -62,9 +73,11 @@ const setupModal = () => {
   
 
   document.querySelectorAll('.image-wrapper').forEach(wrapper => {
-    wrapper.addEventListener('click', () => {
+    const content = wrapper.querySelector('img');
+
+    content.addEventListener('click', () => {
       const currentID = wrapper.dataset.id;
-      modalImg.src = wrapper.querySelector('img').src;
+      modalImg.src = content.src;
       modalCaption.innerText = wrapper.dataset.searchable || "";
 
       // check if the current image is in favorites
@@ -86,6 +99,7 @@ const updateFavPreview = () => {
   if (!favWindowImg) return; // 防止找不到元素报错
 
   let favorites = JSON.parse(localStorage.getItem('my_favorites')) || [];
+
   if (favorites.length > 0) {
     favWindowImg.src = favorites[favorites.length - 1].src;
     console.log("Updated fav preview with:", favorites[favorites.length - 1].src);
@@ -100,7 +114,7 @@ const initModal = () => {
   const closeBtn = document.querySelector('#close-modal');
   const favBtn = document.querySelector('.fav-btn');
   const modalImg = document.querySelector('#modal-img');
-
+  const modalCaption = document.querySelector('#modal-caption');
   //close modal when press close burron
   closeBtn.addEventListener('click', () => {
     dialog.close();
@@ -115,6 +129,7 @@ const initModal = () => {
   favBtn.addEventListener('click', () => {
     const id = favBtn.dataset.id;
     const src = modalImg.src;
+    const text = modalCaption.innerText;
     let favorites = JSON.parse(localStorage.getItem('my_favorites')) || [];
     const index = favorites.findIndex(item => item.id === id);
 
@@ -122,9 +137,10 @@ const initModal = () => {
       favorites.splice(index, 1);
       favBtn.innerText = '🩶';
     } else {
-      favorites.push({ id: id, src: src });
+      favorites.push({ id: id, src: src, text: text });
       favBtn.innerText = '❤️';
     }
+
     // Set localStorage after updating favorites
     localStorage.setItem('my_favorites', JSON.stringify(favorites));
     updateFavPreview(); // Update the latest favorite preview in the corner
