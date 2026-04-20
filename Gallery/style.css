@@ -5,6 +5,14 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
 
+:root {
+  --bg-color: #362208;
+  --primary-color: #af8355;
+  --bright-yellow: #FFE69D;
+  --modal-bg-color: #362208d0;
+}
+
+
 body{
   background-color: #362208;
 }
@@ -256,9 +264,9 @@ input[type="checkbox"]:not(:checked) ~ .dot {
   padding: 0;
   overflow: hidden;
   &::backdrop {
-    background-color: #1a11049c;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    background-color: var(--modal-bg-color);
+    backdrop-filter: blur(100px);
+    -webkit-backdrop-filter: blur(100px);
   }
 }
 
@@ -269,15 +277,15 @@ input[type="checkbox"]:not(:checked) ~ .dot {
 }
 
 
-
-
 .modal-content {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
   gap: 1rem;
+  width: 80%;
   font-family: 'Spectral', serif;
-  color: #af8355;
+  color: var(--bright-yellow);
   img{
     max-width: 100%;
     max-height: 70vh;
@@ -288,18 +296,44 @@ input[type="checkbox"]:not(:checked) ~ .dot {
   }
 }
 
-#modal-caption {
+.modal-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 6rem;
+  width: 20%;
   font-size: 1.2rem;
+  button{
+    cursor: pointer;
+  }
+}
+
+#modal-caption {
+  width: 20%;
+  font-size: 1.2rem;
+  text-align: center;
 }
 
 #close-modal {
-  position: absolute;
-  top: 1.2rem;
-  left: 1.2rem;
-  color: #af8355;
-  border: none;
-  font-size: 3rem;
-  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.fav-btn {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.5rem;
+  p{
+    text-align: center;
+  }
+}
+
+.saved {
+  fill: var(--bright-yellow);
 }
 
 

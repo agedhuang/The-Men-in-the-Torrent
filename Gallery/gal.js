@@ -70,6 +70,8 @@ const setupModal = () => {
   const modalImg = document.querySelector('#modal-img');
   const modalCaption = document.querySelector('#modal-caption');
   const favBtn = document.querySelector('.fav-btn'); 
+  const favBtnText = favBtn.querySelector('p');
+
   
 
   document.querySelectorAll('.image-wrapper').forEach(wrapper => {
@@ -86,7 +88,14 @@ const setupModal = () => {
       let favorites = JSON.parse(localStorage.getItem('my_favorites')) || [];
       // function some will run through the array to see if any item matches the condition
       const isFav = favorites.some(item => item.id === currentID);
-      favBtn.innerText = isFav ? '❤️' : '🩶';
+
+      if (isFav) {
+        favBtnText.innerText = 'Saved';
+        favBtn.querySelector('svg').classList.add('saved');
+      } else {
+        favBtnText.innerText = 'Unsave';
+        favBtn.querySelector('svg').classList.remove('saved');
+      }
       
       dialog.showModal();
     });
@@ -113,6 +122,8 @@ const initModal = () => {
   const dialog = document.querySelector('#modal');
   const closeBtn = document.querySelector('#close-modal');
   const favBtn = document.querySelector('.fav-btn');
+  const favBtnText = favBtn.querySelector('p');
+  const favIcon = favBtn.querySelector('svg');
   const modalImg = document.querySelector('#modal-img');
   const modalCaption = document.querySelector('#modal-caption');
   //close modal when press close burron
@@ -135,10 +146,12 @@ const initModal = () => {
 
     if (index > -1) {
       favorites.splice(index, 1);
-      favBtn.innerText = '🩶';
+      favBtnText.innerText = 'Unsave';
+      favIcon.classList.remove('saved');
     } else {
       favorites.push({ id: id, src: src, text: text });
-      favBtn.innerText = '❤️';
+      favBtnText.innerText = 'Saved';
+      favIcon.classList.add('saved');
     }
 
     // Set localStorage after updating favorites

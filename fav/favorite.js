@@ -66,7 +66,7 @@ const initModal = () => {
   const closeBtn = document.querySelector('#close-modal');
   const favBtn = document.querySelector('.fav-btn');
   const favBtnText = favBtn.querySelector('p');
-  let favIcon = favBtn.querySelector('svg');
+  const favIcon = favBtn.querySelector('svg');
   const modalImg = document.querySelector('#modal-img');
   const modalCaption = document.querySelector('#modal-caption');
   //close modal when press close burron

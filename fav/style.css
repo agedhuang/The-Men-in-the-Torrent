@@ -22,6 +22,7 @@ h1{
   text-align: center;
   margin-block: 2rem;
   font-size: 2.4rem;
+  cursor: default;
 }
 
 .sidebar-container{
@@ -45,6 +46,7 @@ h1{
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 
 .gallery-logo {
@@ -124,6 +126,10 @@ h1{
   }
 }
 
+.image-wrapper img{
+  cursor: pointer;
+}
+
 .hidden {
   display: none;
 }
@@ -178,9 +184,12 @@ h1{
 .modal-buttons {
   display: flex;
   flex-direction: column;
-  gap: 3rem;
+  gap: 6rem;
   width: 20%;
   font-size: 1.2rem;
+  button{
+    cursor: pointer;
+  }
 }
 
 #modal-caption {
