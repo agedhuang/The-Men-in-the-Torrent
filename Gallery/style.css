@@ -287,7 +287,7 @@ input[type="checkbox"]:not(:checked) ~ .dot {
   font-family: 'Spectral', serif;
   color: var(--bright-yellow);
   img{
-    max-width: 100%;
+    max-width: 68%;
     max-height: 70vh;
     width: auto;
     height: auto;
