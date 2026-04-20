@@ -9,6 +9,10 @@ body{
   background-color: #362208;
 }
 
+main {
+  border-top: 1px solid transparent;
+}
+
 .sidebar-container{
   position: fixed;
   /* top: 0; */
@@ -336,15 +340,8 @@ input[type="checkbox"]:not(:checked) ~ .dot {
   }
 
   .fav-window {
-    position: fixed;
-    top: 1rem;
-    right: 50%;
-    transform: translateX(50%);
-    width: 5rem;
-    height: 5rem;
-    border-radius: 0.5rem;
-    background-color: #362208;
-    border: #af8355 solid 0.2rem;
+    width: 3rem;
+    height: 3rem;
   }
 
   #filters {
@@ -367,6 +364,11 @@ input[type="checkbox"]:not(:checked) ~ .dot {
     }
     p{
       display: none;
+    }
+    .dot{
+      flex-shrink: 0;
+      width: 0.5rem;
+      height: 0.1rem;
     }
   }
 
