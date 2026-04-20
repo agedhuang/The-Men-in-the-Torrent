@@ -126,6 +126,16 @@ h1{
   }
 }
 
+#fav-content > p{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.6rem;
+  font-family: 'Spectral', serif;
+  text-align: center;
+}
+
 .image-wrapper img{
   cursor: pointer;
 }
@@ -258,12 +268,59 @@ h1{
   }
 
   h1{
-    font-size: 2rem;
+    font-size: 1.6rem;
   }
 
   .gallery-logo svg{
     align-self: center;
     width: 1.4rem;
     height: auto;
+  }
+
+  .search-wrapper {
+    width: 90%;
+    height: 3.5rem;
+    padding: 1rem 2rem;         
+    background-color: #1a1104;  
+    border: 1px solid #af8355;  
+    border-radius: 10rem;        
+    color: #af8355;            
+    font-family: 'Spectral', serif;
+    font-size: 1.2rem;
+    outline: none; 
+    display: flex;
+    align-items: center;
+    justify-content: space-between; 
+    svg {
+      cursor: pointer;
+      width: 1.2rem;
+    }           
+  }
+
+  .modal-content{
+    flex-direction: column-reverse;
+    justify-content: space-between;
+    align-items: center;
+    height: 75%;
+    width: 90%;
+     img{
+      max-width: 100%;
+      max-height: 80vh;
+    }
+  }
+  .modal-buttons{
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 70%;
+    gap: 4rem;
+  }
+
+  #modal-caption {
+    width: 70%;
+  } 
+
+  #fav-content > p{
+    font-size: 1.2rem;
   }
 }

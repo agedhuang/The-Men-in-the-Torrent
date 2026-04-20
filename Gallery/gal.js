@@ -113,7 +113,7 @@ const updateFavPreview = () => {
     favWindowImg.src = favorites[favorites.length - 1].src;
     console.log("Updated fav preview with:", favorites[favorites.length - 1].src);
   }else {
-    favWindowImg.src = '../assets/gen1/img/1.1.avif';}
+    favWindowImg.src = '../assets/Collection.svg';}
 }
 
 
