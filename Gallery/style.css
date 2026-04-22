@@ -385,8 +385,9 @@ input[type="checkbox"]:not(:checked) ~ .dot {
     padding-inline: 1rem;
     padding-block: 0rem;
   }
-    .sidebar-container{
+  .sidebar-container{
     padding-inline: 1rem ;
+    height: 6rem;
   }
 
   .logo svg{
@@ -411,6 +412,7 @@ input[type="checkbox"]:not(:checked) ~ .dot {
   .fav-window {
     width: 3rem;
     height: 3rem;
+    border: var(--bright-yellow) solid 0.1rem;
   }
 
   #filters {
