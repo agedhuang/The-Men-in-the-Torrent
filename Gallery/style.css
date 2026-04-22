@@ -204,7 +204,7 @@ input[type="checkbox"]:not(:checked) ~ .dot {
   height: 80%;
   border-radius: 0.5rem;
   background-color: #362208;
-  border: #FFE69D solid 0.2rem;
+  border: var(--bright-yellow) solid 0.16rem;
   overflow: hidden;
   transform-origin: bottom right;
   transition: all 0.3s ease;
@@ -214,9 +214,9 @@ input[type="checkbox"]:not(:checked) ~ .dot {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: #FFE69D;
-    background-color: #af9033a5;
-    border: 0.005px solid #FFE69D;
+    color: var(--bright-yellow);
+    background-color: var(--modal-bg-color);
+    border: 0.005px solid var(--bright-yellow);
     font-family: 'Spectral', serif;
     padding: 0.06rem 0.12rem;
     box-sizing: border-box;
@@ -235,13 +235,6 @@ input[type="checkbox"]:not(:checked) ~ .dot {
   /* border-radius: 1rem; */
 }
 
-.fav-window:hover {
-  transform: scale(9);
-}
-
-.fav-window:hover p {
-  opacity: 1;
-}
 
 .image-wrapper * {
   cursor: pointer;
@@ -271,15 +264,15 @@ input[type="checkbox"]:not(:checked) ~ .dot {
     border-radius: 1rem;
     padding-inline: 1rem;
     transform: translate(0,0);
-    display: none;
+    opacity: 0;
     transition: all 0.5s ease;
   }
 }
 
 
 #notification li.active {
-  display: block;
-  transform: translate(0,2rem);
+  opacity: 1;
+  transform: translate(0,-2rem);
 }
 
 
@@ -370,7 +363,15 @@ input[type="checkbox"]:not(:checked) ~ .dot {
   fill: var(--bright-yellow);
 }
 
+@media (hover: hover) {
+  .fav-window:hover {
+    transform: scale(9);
+  }
 
+  .fav-window:hover p {
+    opacity: 1;
+  }
+}
 
 @media screen and (width <= 1000px) {
   #content {

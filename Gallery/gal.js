@@ -191,10 +191,10 @@ const applyFilter = (event) => {
         notification.classList.remove('active');
         notification.classList.add('active');
         console.log(`Gen ${genValue} filter applied, showing Gen ${genValue} content.`);
-        // disappear in 1 second
+        // disappear in 2 second
         setTimeout(() => {
           notification.classList.remove('active');
-        }, 1000);
+        }, 2000);
       }
     }
   };
