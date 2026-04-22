@@ -409,6 +409,10 @@ input[type="checkbox"]:not(:checked) ~ .dot {
     height: auto;
   }
 
+  .fav-wrapper{
+    height: auto;
+  }
+
   .fav-window {
     width: 3rem;
     height: 3rem;
@@ -469,7 +473,7 @@ input[type="checkbox"]:not(:checked) ~ .dot {
   }
 
   #notification li{
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     border-radius: 1rem;
     padding-inline: 0.6rem;
   }
