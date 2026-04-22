@@ -185,20 +185,30 @@ const applyFilter = (event) => {
   if (event) {
     const genValue = event.target.value;
     const isChecked = event.target.checked;
-    const notification = document.querySelector(`#gen${genValue}-nofi`);
+    const notificationOn = document.querySelector(`#gen${genValue}-on`);
+    const notificationOff = document.querySelector(`#gen${genValue}-off`);
 
-    if (notification) {
+    if (notificationOn && notificationOff) {
       if (isChecked) {
-        notification.classList.remove('active');
-        notification.classList.add('active');
+        notificationOn.classList.remove('active');
+        notificationOn.classList.add('active');
         console.log(`Gen ${genValue} filter applied, showing Gen ${genValue} content.`);
-        // disappear in 2 second
+        // disappear in 1.3 second
         setTimeout(() => {
-          notification.classList.remove('active');
-        }, 1600);
+          notificationOn.classList.remove('active');
+        }, 1300);
       }
-    }
-  };
+      else {
+        notificationOff.classList.remove('active');
+        notificationOff.classList.add('active');
+        console.log(`Gen ${genValue} filter removed, hiding Gen ${genValue} content.`);
+        // disappear in 1.3 second
+        setTimeout(() => {
+          notificationOff.classList.remove('active');
+        }, 1300);
+      }
+    };
+  }
 }
 
 
