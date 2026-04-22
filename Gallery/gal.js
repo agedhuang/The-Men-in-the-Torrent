@@ -164,7 +164,7 @@ const initModal = () => {
 
 
 // setting the filter function ------------------
-const applyFilter = () => {
+const applyFilter = (event) => {
   const checkboxes = document.querySelectorAll('.gen-filter:checked');
   let selectedGens = Array.from(checkboxes).map((cb) => cb.value);
   
@@ -179,46 +179,65 @@ const applyFilter = () => {
       wrapper.classList.add('hidden');
     }
   });
-};
 
+  // Notification logic here-----------
+  if (event) {
+    const genValue = event.target.value;
+    const isChecked = event.target.checked;
+    const notification = document.querySelector(`#gen${genValue}-nofi`);
 
-
-
-//setting thr search function------------------
-const applySearch = () => {
-  const keyword = document.querySelector('#search-input').value.toLowerCase();
-  const wrappers = document.querySelectorAll('[data-searchable]');
-  
-  wrappers.forEach((wrapper) => {
-    const searchable = wrapper.dataset.searchable;
-    
-    if (keyword === '' || searchable.includes(keyword)) {
-      wrapper.classList.remove('hidden');
-    } else {
-      wrapper.classList.add('hidden');
+    if (notification) {
+      if (isChecked) {
+        notification.classList.remove('active');
+        notification.classList.add('active');
+        console.log(`Gen ${genValue} filter applied, showing Gen ${genValue} content.`);
+        // disappear in 1 second
+        setTimeout(() => {
+          notification.classList.remove('active');
+        }, 1000);
+      }
     }
-  });
-};
-
-
-// ——————————————————get data from API ——————————————————————
-let fetchJson = (url, callback) => {
-	fetch(url, { cache: 'no-store' })
-		.then((response) => response.json())
-    .then((json) => callback(json))
+  };
 }
 
-// I'm using https://github.com/benborgers/opensheet to get the live data from Google sheeet--------------------------------
-fetchJson(`https://opensheet.elk.sh/${googleSheetID}/${tabName2}`, (json) => {
-	console.log("Content data:", json) // See what we get back.
-  currentBlocksData = json; // Store the blocks data in the global variable for later use (e.g., shuffle button).
+
+
+
+  //setting thr search function------------------
+  const applySearch = () => {
+    const keyword = document.querySelector('#search-input').value.toLowerCase();
+    const wrappers = document.querySelectorAll('[data-searchable]');
   
-  initModal(); // Initialize modal interactions listener 
-  layoutBlocks(json);
+    wrappers.forEach((wrapper) => {
+      const searchable = wrapper.dataset.searchable;
+    
+      if (keyword === '' || searchable.includes(keyword)) {
+        wrapper.classList.remove('hidden');
+      } else {
+        wrapper.classList.add('hidden');
+      }
+    });
+  };
 
-  applyFilter(); //firstly apply filter to show all
-  updateFavPreview(); //show fav preview at the beginning
-  document.querySelector('#filters').addEventListener('change', applyFilter); // Bind the filter function to the change event of the checkboxes.
 
-  document.querySelector('#search-input').addEventListener('input', applySearch);
-})
+  // ——————————————————get data from API ——————————————————————
+  let fetchJson = (url, callback) => {
+    fetch(url, { cache: 'no-store' })
+      .then((response) => response.json())
+      .then((json) => callback(json))
+  }
+
+  // I'm using https://github.com/benborgers/opensheet to get the live data from Google sheeet--------------------------------
+  fetchJson(`https://opensheet.elk.sh/${googleSheetID}/${tabName2}`, (json) => {
+    console.log("Content data:", json) // See what we get back.
+    currentBlocksData = json; // Store the blocks data in the global variable for later use (e.g., shuffle button).
+  
+    initModal(); // Initialize modal interactions listener 
+    layoutBlocks(json);
+
+    applyFilter(); //firstly apply filter to show all
+    updateFavPreview(); //show fav preview at the beginning
+    document.querySelector('#filters').addEventListener('change', (e) => applyFilter(e)); // Bind the filter function to the change event of the checkboxes.
+
+    document.querySelector('#search-input').addEventListener('input', applySearch);
+  });

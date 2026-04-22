@@ -247,6 +247,40 @@ input[type="checkbox"]:not(:checked) ~ .dot {
   cursor: pointer;
 }
 
+#notification {
+  position: fixed;
+  bottom: 9rem;
+  left: 50%;
+  transform: translate(-50%,0);
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 16rem;
+  height: 7rem;
+  border-radius: 1rem;
+  pointer-events: none;
+  li{
+    color: var(--bright-yellow);
+    background-color: var(--modal-bg-color);
+    border: var(--bright-yellow) solid 1px;
+    position: absolute;
+    font-family: 'Spectral', serif;
+    font-size: 1.8rem;
+    border-radius: 1rem;
+    padding-inline: 1rem;
+    transform: translate(0,0);
+    display: none;
+    transition: all 0.5s ease;
+  }
+}
+
+
+#notification li.active {
+  display: block;
+  transform: translate(0,2rem);
+}
 
 
 #modal {
@@ -429,6 +463,12 @@ input[type="checkbox"]:not(:checked) ~ .dot {
       cursor: pointer;
       width: 1.2rem;
     }           
+  }
+
+  #notification li{
+    font-size: 1.5rem;
+    border-radius: 1rem;
+    padding-inline: 0.6rem;
   }
 
   .modal-content{
