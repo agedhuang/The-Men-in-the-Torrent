@@ -137,6 +137,7 @@ const initModal = () => {
     }
   });
 
+  //favbtn listener
   favBtn.addEventListener('click', () => {
     const id = favBtn.dataset.id;
     const src = modalImg.src;
@@ -194,7 +195,7 @@ const applyFilter = (event) => {
         // disappear in 2 second
         setTimeout(() => {
           notification.classList.remove('active');
-        }, 2000);
+        }, 1600);
       }
     }
   };
